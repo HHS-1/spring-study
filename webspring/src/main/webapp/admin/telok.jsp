@@ -36,6 +36,7 @@ ${no}
 String을 사용하고 싶을 경우 클래스 배열을 활용하여 출력 또는 setAttribute를 이용
 배열 데이터 전용 속성 : items
  -->
+ <!-- JSP에 setATtribute를 이용하여 JSTL로 items에 값을 넣어서 처리 .. 안 쓰는 게 좋음-->
 <c:forEach var="arr" items="${data}" >
 <li>${arr}</li>
 </c:forEach>

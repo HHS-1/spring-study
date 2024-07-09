@@ -24,6 +24,8 @@
 
 </beans:bean>
 <!--  class를 로드하는 부분(Controller) -->
-<beans:bean class="webspring.mainpage"></beans:bean>
-<beans:bean class="webspring.mainpage2"></beans:bean>
+<!-- <beans:bean class="webspring.mainpage"></beans:bean>
+<beans:bean class="webspring.mainpage2"></beans:bean> -->
+<!-- 패키지 전체에 어노테이션 및 XML에 사용하는 id값을 연동할 수 있도록 오픈함 -->
+<context:component-scan base-package="webspring"/>
 </beans:beans>

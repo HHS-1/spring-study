@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/webapp/WEB-INF/webpage.xml</config>
 		<config>src/main/webapp/WEB-INF/webpage2.xml</config>
+		<config>src/main/webapp/WEB-INF/dbconfig.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
