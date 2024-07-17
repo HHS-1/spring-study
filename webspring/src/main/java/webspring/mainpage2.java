@@ -75,6 +75,7 @@ public class mainpage2 {
 	//name값을 배열로 받을 경우 필수로 값을 받겠다라는 어노테이션을 사용하지 못함(required = true)
 	/*datasource를 이용하여 해당 정보를 db에 insert 하시오.*/
 	@RequestMapping(value="/memberok.do",method=RequestMethod.POST)
+	//ModelAttribute : DAO와 함께 사용하는 형태의 클래스 입니다.
 	public String memberok(@ModelAttribute("mb") member_dao dao) {	
 		try {
 			Connection con = dbinfo.getConnection();
@@ -84,7 +85,7 @@ public class mainpage2 {
 			ps.setString(2, dao.getUpass());
 			ps.setString(3, dao.getUname());
 			int result = ps.executeUpdate();
-			
+			ps.close();
 			if(result > 0) System.out.println("db저장 성공");
 			else System.out.println("저장 실패");
 			
