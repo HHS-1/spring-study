@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,15 +15,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
+//import org.json.simple.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,7 +38,80 @@ public class api_main {
 	BasicDataSource dbinfo;
 	PrintWriter pw = null;
 	
-	@CrossOrigin(origins="*")
+	//JSON 데이터베이스 API
+	@GetMapping("/ecma/ecma14ok.do")
+	public String ecma14ok(HttpServletResponse res, Model m) throws Exception {
+		String columns[] = {"midx","user_id","user_name"};
+		Object data[][] = {
+				{1,"apples","홍길동"},
+				{2,"apink","에이핑크"},
+		};
+		JSONObject jo = new JSONObject();
+		JSONArray ja = new JSONArray();
+		
+		for(Object d[] : data) {
+			int a = 0;
+			for(String c : columns) {
+				jo.put(c,d[a]);
+				a++;
+			}
+			ja.put(jo);
+		}
+		
+		String result = ja.toString();
+		m.addAttribute("data",result);
+		
+		return "ecma/ecma14ok";
+	}
+	
+	
+	//@CrossOrigin(origins = "*")
+	@DeleteMapping("/ecma/ecma13.do/{no}")
+	public String ecma13(@PathVariable String no, HttpServletResponse res) throws Exception{
+		this.pw = res.getWriter();
+		//한개의 데이터 또는 여러개의 데이터를 삭제 할수 있으므로 배열로 구분하여 처리
+		String[] datas = no.split(",");
+		System.out.println(Arrays.toString(datas));
+		this.pw.print("ok");
+		this.pw.close();
+		return null;
+	}
+	
+	@PutMapping("/ecma/ecma13put.do/{no}")
+	public String ecam13put(@PathVariable String no, HttpServletResponse res) throws Exception{
+		this.pw = res.getWriter();
+		String[] datas = no.split(",");
+		System.out.println(Arrays.toString(datas));
+		this.pw.print("ok");
+		this.pw.close();
+		return null;
+	}
+	
+	//외부 서버에서 요청한 정보를 바탕으로 데이터를 삭제하는 형태
+	@PostMapping("/host/delete.do/{no}")
+	public void deleteok(@PathVariable String no, HttpServletResponse res) throws Exception {
+		//외부서버 요청 특정서버만 핸들링 될수있도록 해야함 http://172.30.1.92:8080
+		res.addHeader("Access-Control-Allow-Origin", "*"); 
+		res.addHeader("Access-Control-Allow-Credentials", "true");
+		System.out.println(no);
+		
+		this.pw = res.getWriter();
+		if (no==null || no=="") {
+			this.pw.print("error");
+		}
+		else {
+			String result = this.ecma13(no, res);
+			this.pw.print(result);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	@CrossOrigin(origins="http://172.30.1.80:8080")
 	@PostMapping("/ecma/ecma12ok.do")
 	public String ecma12(@RequestBody String data, HttpServletResponse res) throws Exception {
 		try {
@@ -46,7 +123,7 @@ public class api_main {
 		return null;
 	}
 	
-	@CrossOrigin(origins="*")
+	@CrossOrigin(origins="http://172.30.1.80:8080")
 	@PostMapping("/ecma/ecma12object.do")
 	public String ecma12object(@RequestBody String data, HttpServletResponse res) throws Exception {
 		try {
