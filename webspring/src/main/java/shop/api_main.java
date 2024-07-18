@@ -1,5 +1,7 @@
 package shop;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.SqlSessionHolder;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -40,26 +42,32 @@ public class api_main {
 	
 	//JSON 데이터베이스 API
 	@GetMapping("/ecma/ecma14ok.do")
-	public String ecma14ok(HttpServletResponse res, Model m) throws Exception {
-		String columns[] = {"midx","user_id","user_name"};
-		Object data[][] = {
-				{1,"apples","홍길동"},
-				{2,"apink","에이핑크"},
-		};
-		JSONObject jo = new JSONObject();
-		JSONArray ja = new JSONArray();
+	public String ecma14ok(HttpServletRequest req, Model m, coupon_dao dao) throws Exception {
+
+		Connection con = dbinfo.getConnection();
+		String sql = "select * from event order by cidx desc";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
 		
-		for(Object d[] : data) {
-			int a = 0;
-			for(String c : columns) {
-				jo.put(c,d[a]);
-				a++;
-			}
+		JSONArray ja = new JSONArray();
+		while(rs.next()) {
+			JSONObject jo = new JSONObject();
+			jo.put("cidx", rs.getString(1));
+			jo.put("cpname", rs.getString(2));
+			jo.put("cprate", rs.getString(3));
+			jo.put("cpuse", rs.getString(4));
+			jo.put("cpdate", rs.getString(5));
+			jo.put("indate", rs.getString(6));
 			ja.put(jo);
 		}
 		
+		
 		String result = ja.toString();
 		m.addAttribute("data",result);
+		
+		rs.close();
+		ps.close();
+		con.close();
 		
 		return "ecma/ecma14ok";
 	}

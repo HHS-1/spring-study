@@ -8,9 +8,23 @@
 </head>
 <body>
 <input type="button" value="데이터 요청" id="btn">
+<table border="1">
+<thead>
+<tr>
+	<td>번호</td>
+	<td>쿠폰명</td>
+	<td>할인율</td>
+	<td>유효기관</td>
+	</tr>
+</thead>
+<tbody id="dataview">
+</tbody>
+	
+	
+</table>
 </body>
 <script type="module">
-import {data_load} from './ecma14.js';
+import {data_load} from './ecma14.js?v=3';
 document.querySelector("#btn").addEventListener("click",function(){
 	new data_load().json_data();
 })
