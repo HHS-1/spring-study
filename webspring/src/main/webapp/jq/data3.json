@@ -1,0 +1,22 @@
+{
+  "coupon": [
+    {
+      "cidx": "2",
+      "cpname": "쿠폰명1",
+      "cpuse": "Y",
+      "cpdate": "2024-07-19"
+    },
+    {
+      "cidx": "3",
+      "cpname": "쿠폰명2",
+      "cpuse": "Y",
+      "cpdate": "2024-07-19"
+    },
+    {
+      "cidx": "4",
+      "cpname": "쿠폰명3",
+      "cpuse": "Y",
+      "cpdate": "2024-07-19"
+    }
+  ]
+}

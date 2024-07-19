@@ -1,0 +1,12 @@
+[
+	{
+		"user_name" : "강감찬",
+		"user_id" : "kang",
+		"user_pass" : "kang123"
+	},
+	{
+		"user_name" : "이순신",
+		"user_id" : "lee",
+		"user_pass" : "lee123"
+	}
+]

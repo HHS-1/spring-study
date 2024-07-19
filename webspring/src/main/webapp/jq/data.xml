@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apink> <!-- 대표키 -->
+<userlist> <!-- 그룹키 -->
+<username>홍길동</username>  <!-- 이하3 보조키 -->
+<userid>hong</userid>
+<useremail>hong@nate.com</useremail>
+</userlist>
+
+<userlist>
+<username>이순신</username>
+<userid>lee</userid>
+<useremail>lee@naver.com</useremail>
+</userlist>
+
+
+</apink>

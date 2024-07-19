@@ -1,0 +1,23 @@
+{
+"shop_info" : [
+		{
+		"url":"http://abc.co.kr",
+		"tel":"1588-1234",
+		"ceo":"hong",
+		"menu":[
+				["menu1","menu2"],
+				["menu3", "menu4"]
+			]
+		},
+		
+		{
+		"url":"http://edf.co.kr",
+		"tel":"1588-9874",
+		"ceo":"lee",
+		"menu":[
+				["menu1","menu2"],
+				["menu3", "menu4"]
+			]
+		}
+	]
+}
