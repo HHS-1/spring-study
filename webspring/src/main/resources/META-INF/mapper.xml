@@ -1,3 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="META-INF.mapper"></mapper>
+<mapper namespace="datadb">
+<!-- 
+insert, select, update, delete
+${} : 필드명, 테이블명 파라미터
+#{} : 값을 적용시킬 때 사용하는 파라미터
+resultType : select에만 적용하는 속성
+ -->
+ <delete id="point_delete">
+ delete from userpoint where uidx=#{uidx}
+ </delete>
+ 
+<select id="point_one" resultType="point_dao">
+select * from userpoint where uidx=#{aa} order by uidx desc
+</select>
+ 
+<select id="point_select" resultType="point_dao"> <!-- config.xml -->
+select * from userpoint order by uidx desc 
+</select>
+ 
+<insert id="coupon_insert"> <!-- id값으로 query문을 실행 -->
+insert into event (cidx, cpname, cprate, cpuse, cpdate, indate)
+values ('0', #{cpname}, #{cprate}, #{cpuse}, #{cpdate}, now())
+</insert>
+
+<insert id="point_insert">
+insert into userpoint (uidx, uid, uname, upoin, udate)
+values ('0', #{uid}, #{uname}, #{upoin}, now())
+</insert>
+</mapper>

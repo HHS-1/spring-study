@@ -6,12 +6,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.Ignore;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +27,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class apiMain {
+	/*
+	 * @Inject private BasicDataSource dataSource2; //dbcon.java(@Bean)*/
+
 	@Autowired
 	BasicDataSource dbinfo;
+	//@Inject
+	//SqlSessionFactory sqlfact;
+	
+	/*@GetMapping("/testsql.do")
+	public String testsql() {
+		try {
+			SqlSession se = sqlfact.openSession();
+			System.out.println(se);
+
+		}catch(Exception e) {
+			System.out.println("factory err");
+		}
+		return null;
+	}*/
+	
+	
 	PrintWriter pw = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
 	
+
 	
 	@CrossOrigin(origins="*")
 	@ResponseBody

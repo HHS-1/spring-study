@@ -1,3 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration></configuration>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  <!-- DAO, VO, Getter, Setter를 연결하는 역할(Model, Controller) -->
+  <configuration>
+  <typeAliases>
+  <!-- 각종 DAO 클래스를 모두 등록하면 됨. 단, alias가 동일하면 안됨 -->
+  	<typeAlias alias="coupondao" type="api.cpdao"/>
+  	<typeAlias alias="point_dao" type="api.point_dao"></typeAlias>
+  </typeAliases>
+  
+  </configuration>
