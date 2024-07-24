@@ -8,7 +8,7 @@
 </head>
 <body>
 <form id="frm">
-등록일자 : <input type="date" name="today" onchange="date_check(this.value)">
+등록일자 : <input type="date" name="today" value="${day}" onchange="date_check(this.value)">
 <font color="red" id="error_red" style="display : none;">※이미 등록된 일자입니다.</font>
 <br>
 서울 : <input type="text" name="area_part1" value="0" maxlength="3"><br> 

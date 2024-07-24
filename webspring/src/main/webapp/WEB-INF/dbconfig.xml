@@ -30,4 +30,15 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="close">
 		<constructor-arg name="sqlSessionFactory" ref="sqlfact"></constructor-arg>
 	</bean>
+	
+	<!-- 별도의 config, mapper를 사용하는 방식 -->
+	<bean id="sqlfact2" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dbinfo"></property>	
+		<property name="configLocation" value="classpath:/META-INF/config2.xml"></property>	
+		<property name="mapperLocations" value="classpath:/META-INF/mapper2.xml"></property>	
+	</bean>
+	
+	<bean id="sqlSession2" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="close">
+		<constructor-arg name="sqlSessionFactory" ref="sqlfact2"></constructor-arg>
+	</bean>
 </beans>

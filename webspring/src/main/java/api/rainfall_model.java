@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -40,4 +41,8 @@ public class rainfall_model {
 		return this.tm.selectList("datadb.rainfall_select", today);
 	}
 	
+	//강우량 수정
+	public int data_modify(rainfall_dao data) {
+		return this.tm.update("datadb.rainfall_update", data);
+	}
 }

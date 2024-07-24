@@ -7,6 +7,11 @@ ${} : 필드명, 테이블명 파라미터
 #{} : 값을 적용시킬 때 사용하는 파라미터
 resultType : select에만 적용하는 속성
  -->
+ <update id="rainfall_update" parameterType="api.rainfall_dao">
+ update rainfall set area_part1=#{area_part1}, area_part2=#{area_part2}, area_part3=#{area_part3}, area_part4=#{area_part4}, area_part5=#{area_part5} where today=#{today}
+ </update>
+ 
+ 
  <select id="rainfall_select" resultType="rainfall_dao">
  select * from rainfall where today=#{today}
  </select>
@@ -16,7 +21,7 @@ resultType : select에만 적용하는 속성
  </select>
  
  <select id="rain_select" resultType="rainfall_dao">
- select * from rainfall order by today desc
+ select today from rainfall order by today desc
  </select>
  
  <insert id="rain_insert">

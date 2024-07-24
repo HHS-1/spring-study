@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noticeDB">
+
+	<delete id="notice_del">
+	delete * from notice where nidx=#{nidx}
+	</delete>
+
+	<select id="notice_all" resultType="noticeDAO">
+	select * from notice order by nidx desc;
+	</select>
+
+    <select id="notice_search" resultType="noticeDAO" parameterType="Map">
+        select * from notice 
+        <where>
+	        <if test="search_part==1"> <!-- 제목을 검색할 경우 -->
+	        	n_subject like concat('%',#{search_word},'%')
+	        </if>
+	        <if test="search_part==2">
+	        	n_title = #{search_word}
+	        </if>
+	        <if test="search_part==3">
+	        	n_subject like concat('%',#{search_word},'%') or n_text like concat('%',#{search_word},'%')
+	        </if>
+        </where>
+        order by nidx desc;
+    </select>
+</mapper>

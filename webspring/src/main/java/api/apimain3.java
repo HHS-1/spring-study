@@ -8,6 +8,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +31,15 @@ public class apimain3 {
 	@Resource(name = "rainfalls")
 	private rainfall_model rm;
 	
+	//강우량 수정
+	@PostMapping("/rainfall/rainfall_modify.do")
+	public ResponseEntity<String> rainfall_modify(@RequestBody rainfall_dao data) {
+		this.rm.data_modify(data);
+		return null;
+	}
+	
+	
+	//날짜에 따른 강우량 select
 	@GetMapping(value = "/rainfall/rainfall_select.do", produces = "application/json")
 	@ResponseBody
 	public String rainfall_select(@RequestParam String today) {
@@ -38,12 +49,14 @@ public class apimain3 {
 		return ja.toString();
 	}
 	
+	//강우량 날짜 select
 	@GetMapping("/rainfall/rainfall_list.do")
 	public String rainfall_list(Model m) throws Exception {
 		m.addAttribute("data",this.rm.rain_select());
 		return "/rainfall/rainfall_list";
 	}
 	
+	//날짜 중복 검사
 	@GetMapping("/rainfall/rainfall_check.do")
     @ResponseBody
 	public String rainfall_check(@RequestParam String today) throws Exception {
