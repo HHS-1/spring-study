@@ -3,7 +3,11 @@
 <mapper namespace="noticeDB">
 
 	<delete id="notice_del">
-	delete * from notice where nidx=#{nidx}
+	delete * from notice where nidx in (
+	<foreach collection="array" item="data" separator=",">
+	#{data}
+	</foreach>
+	)
 	</delete>
 
 	<select id="notice_all" resultType="noticeDAO">
